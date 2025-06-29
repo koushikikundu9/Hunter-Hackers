@@ -1,22 +1,26 @@
 import {Contact} from "@/lib/model/contact";
-import { connectDB } from "@/lib/db";
-
+import { mongoURl } from "@/lib/db";
+import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
 export async function GET(req) {
-  await connectDB();
+  await mongoose.connect(mongoURl);
 
   try {
-    const data = await Contact.find();
-    console.log(data);
-    return NextResponse.json(data);
+    if (mongoose.connection.readyState === 0) {
+          await mongoose.connect(mongoURl, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+          });
+          console.log("✅ MongoDB connected");
+        }
   } catch (error) {
     console.error("DB fetch error:", error);
     return NextResponse.json({ error: "Failed to fetch contacts" }, { status: 500 });
   }
 }
 
-export async function POST(req) {
+/*export async function POST(req) {
   try {
     await connectDB();
     const body = await req.json(); // Parse the request body
@@ -34,4 +38,4 @@ export async function POST(req) {
     console.error("Error creating user:", error);
     return NextResponse.json({ error: "Failed to create user" }, { status: 500 });
   }
-}
+}*/
