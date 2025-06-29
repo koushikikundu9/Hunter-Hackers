@@ -21,7 +21,7 @@ const Contact = () => {
   console.log('Form Submitted:', formData);
   alert("Form recorded");
   try {
-    const response = await fetch("http://localhost:3000/api/postcontact", {
+    const response = await fetch("/api/postcontact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
