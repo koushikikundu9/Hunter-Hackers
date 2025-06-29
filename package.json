@@ -15,6 +15,7 @@
     "@tsparticles/slim": "^3.8.1",
     "clsx": "^2.1.1",
     "git": "^0.1.5",
+    "mongodb": "^6.17.0",
     "mongoose": "^8.16.1",
     "motion": "^12.19.2",
     "next": "15.3.4",
