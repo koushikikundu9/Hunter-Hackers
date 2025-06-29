@@ -7,22 +7,18 @@ export async function GET(req) {
   await mongoose.connect(mongoURl);
 
   try {
-    if (mongoose.connection.readyState === 0) {
-          await mongoose.connect(mongoURl, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-          });
-          console.log("✅ MongoDB connected");
-        }
+    const data = await Contact.find();
+    console.log(data);
+    return NextResponse.json(data);
   } catch (error) {
     console.error("DB fetch error:", error);
     return NextResponse.json({ error: "Failed to fetch contacts" }, { status: 500 });
   }
 }
 
-/*export async function POST(req) {
+export async function POST(req) {
   try {
-    await connectDB();
+   await mongoose.connect(mongoURl);
     const body = await req.json(); // Parse the request body
 
     const { name, email, message } = body;
@@ -38,4 +34,4 @@ export async function GET(req) {
     console.error("Error creating user:", error);
     return NextResponse.json({ error: "Failed to create user" }, { status: 500 });
   }
-}*/
+}
