@@ -1,0 +1,18 @@
+.about {
+  max-width: 80vw;
+  margin: auto;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;   
+}
+
+h1 {
+  margin-top: 20px;
+}
+
+@media screen and (min-width: 30em) {
+  .about {
+  min-width: 10vw;
+  border-radius: 5px;
+}
+}
